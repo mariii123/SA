@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../bootstrap-5.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../fontawesome-5.15.3/css/all.css">
+    <link rel="stylesheet" href="../css/dados.css">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark " style="background-color:  #038c7f ">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/home">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/usuario/list}">Lista de usuários</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="table-light">
+            <tr>
+                <th scope="col">Altere seus dados</th>
+                <input type="file"
+                       id="avatar" name="avatar"
+                       accept="image/png, image/jpeg">
+            </tr>
+            </thead>
+            
+
+            <tr>
+                <th scope="col">Nome</th>
+            <tr th:each="usuario:${usuario}">
+                <td th:text="${usuario.nome}"></td>
+            </tr>
+
+            <tr>
+                <th scope="col">CPF</th>
+            <tr th:each="usuario:${usuario}">
+                <td th:text="${usuario.cpf}"></td>
+            </tr>
+
+            <tr>
+                <th scope="col">Telefone</th>
+            <tr th:each="usuario:${usuario}">
+                <td th:text="${usuario.telefone}"></td>
+            </tr>
+
+            <tr>
+                <th scope="col">Email</th>
+            <tr th:each="usuario:${usuario}">
+                <td th:text="${usuario.email}"></td>
+            </tr>
+
+            <tr th:each="usuario:${usuario}">
+                <i class="fa fa-edit"></i></a></td>
+                <td scope="col"><a class="a-delete"
+                                   th:onclick="|showModalDeletar('usuario', ${usuario.id})|">
+                    <i class="fa fa-trash"></i></a></td>
+                <td scope="col"><a class="a-edit" th:href="@{'./edit/' + ${usuario.id}}">
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" id="modalDeletar">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Atenção</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Você realmente deseja deletar o registro?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-danger"
+                        th:onclick="deletar()"
+                >
+                    Deletar
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../bootstrap-5.0.0/js/bootstrap.min.js"></script>
+<script src="../js/script.js"></script>
+</body>
+
+</html>
